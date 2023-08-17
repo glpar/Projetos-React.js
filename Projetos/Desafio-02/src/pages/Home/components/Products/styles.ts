@@ -11,12 +11,30 @@ background-color: ${(props) => props.theme['card']};
 border-radius: 12px 48px 12px 48px ;
 align-items: center;
 vertical-align: middle;
+max-width: 100%;
+-moz-transition: all 0.3s;
+-webkit-transition: all 0.3s;
+transition: all 0.3s;
+
+&:hover {
+    -moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
 
 img {
     justify-self: baseline;
     width: 45%;
     top: 2rem;
-    /* height: 100%; */
+    max-width: 100%;
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+img:hover {
+    -moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.2);
 }
 
 .nameProduct {

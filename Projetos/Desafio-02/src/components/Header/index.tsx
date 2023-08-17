@@ -16,7 +16,7 @@ export function Header(){
                 </button>
                 {/* <NavLink to="/" title="Timer">
                 </NavLink> */}
-                <NavLink to="history" title="Histórico">
+                <NavLink to="checkout" title="Checkout">
                     <ShoppingCart className="shopIcon" size={24}  weight="fill" />
                     {/* color="#DBAC2C" */}
                 </NavLink>

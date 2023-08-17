@@ -8,6 +8,12 @@ export const defaultTheme = {
     'card-description': '#8D8686',
     'card-quantity': '#E6E5E5',
 
+    'checkout-title': '#403937',
+
+    'form-input': '#EDEDED',
+    'form-placeholder': '#8D8686',
+    'form-border': '#E6E5E5',
+
     'gray-100': '#E1E1E6',
     'gray-300': '#C4C4CC',
     'gray-400': '#8D8D99',

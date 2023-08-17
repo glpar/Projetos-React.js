@@ -2,6 +2,7 @@ import { useState } from "react"
 import { BuyContainer, ProductCard, QuantityContainer, Tags } from "./styles"
 import { Minus, Plus, ShoppingCart } from "phosphor-react"
 import { NavLink } from "react-router-dom"
+import { useFormContext } from "react-hook-form"
 
 interface ProductProps {
     id: string
@@ -15,6 +16,7 @@ interface ProductProps {
 
 export function Products({id, name, image, description, tags, price}: ProductProps){
     const [count, setCount] = useState(0);
+    const {register} = useFormContext()
 
     return (
         <ProductCard>
@@ -32,7 +34,7 @@ export function Products({id, name, image, description, tags, price}: ProductPro
             <BuyContainer>
                 <div className="priceProduct">{price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
                 <QuantityContainer>
-                    <button onClick={() => count> 0 ? setCount(count - 1): 0}>
+                    <button onClick={() => count> 0 ? setCount(count - 1): 0} {...register(count), {valueAsNumber: true}}>
                         <Minus/>
                     </button>
                     {count}
@@ -40,7 +42,7 @@ export function Products({id, name, image, description, tags, price}: ProductPro
                         <Plus />
                     </button>
                 </QuantityContainer>
-                <NavLink to="" title="">
+                <NavLink to="checkout" title="Checkout">
                     <ShoppingCart className="shopIcon" size={21.5}  weight="fill" />
                 </NavLink>
 
