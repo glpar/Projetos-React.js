@@ -1,33 +1,50 @@
-import { ReactNode, createContext, useEffect, useReducer } from "react";
-import { Cycle, cycleReducer } from "../reducers/cycles/reducer";
+import { ReactNode, createContext, useContext, useEffect, useReducer, useState } from "react";
+import { Product, productReducer, } from "../reducers/cycles/reducer";
 import { AddNewCycleAction, MarkCurrentCycleAsFinishedAction, interruptCurrentCycleAction } from "../reducers/cycles/actions";
 
-export interface CreateCycleData {
+export interface CreateProductData {
+    id: string;
     image: string;
     name: string;
     description: string;
     price: number;
 }
 
-export interface CycleContextType {
-    cycles: Cycle[];
-    activeCycle: Cycle | undefined;
-    activeCycleId: string | null;
-    markCurrentCycleAsFinished: () => void;
-    createNewCycle: (data: CreateCycleData) => void;
-    interruptCurrentCycle: () => void;
+export interface ProductContextType {
+    products: Product[];
+    // activeProduct: Product | undefined;
+    activeProductId: string | null;
+    productsCart: Product[];
+    setProductsCart: React.Dispatch<React.SetStateAction<Product[]>>;
+
+    // addProductsCart:(id: string) =>void;
+    // const setProductsCart: (value: React.SetStateAction<never[]>) => void
+//     createNewCycle: (data: CreateProductData) => void;
+//     interruptCurrentCycle: () => void;
 }
 
-export const CyclesContext = createContext({} as CycleContextType)
+export const ProductsContext = createContext<ProductContextType | undefined>(undefined);
 
-interface CycleContextProviderProps {
+export function useProductsContext() {
+    const context = useContext(ProductsContext);
+    if (!context) {
+        throw new Error("useProductsContext must be used within a ProductsContextProvider");
+    }
+    return context;
+}
+
+interface ProductContextProviderProps {
     children: ReactNode;
 }
 
-export function CyclesContextProvider({children}: CycleContextProviderProps){
-    const [cycleState, dispatch] = useReducer(cycleReducer, {
-        cycles: [],
-        activeCycleId: null,
+export function ProductsContextProvider({children}: ProductContextProviderProps){
+
+    
+    const [productsCart, setProductsCart] = useState<Product[]>([]);
+
+    const [cycleState] = useReducer(productReducer, {
+        products: [],
+        activeProductId: null,
      }, (initialState) => {
         const storedStateAsJSON = localStorage.getItem('@ignite-timer:cycles-state-1.0.0');
 
@@ -38,17 +55,85 @@ export function CyclesContextProvider({children}: CycleContextProviderProps){
         return initialState
     })
 
-    const {cycles, activeCycleId} = cycleState;
-    const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId); 
+    // const [productsCart, setProductsCart] = useContext(ProductsContext)
 
-    useEffect(() => {
-        const stateJSON = JSON.stringify(cycleState)
 
-        localStorage.setItem('@ignite-timer:cycles-state-1.0.0',stateJSON)
-    },[cycleState])
+    const {products, activeProductId} = cycleState;
+    // const activeProduct = products.find((product) => product.id === activeProductId); 
 
-    function markCurrentCycleAsFinished() {
-        dispatch(MarkCurrentCycleAsFinishedAction())
+
+
+
+
+    return (
+        <ProductsContext.Provider value={{
+            // activeProduct, 
+            activeProductId, 
+            products,
+            productsCart,
+            setProductsCart,
+        }}>
+        
+            {children}
+        </ProductsContext.Provider>
+    )
+
+} 
+
+    // const [cycleState] = useReducer(cycleReducer, {
+    //     cycles: [],
+    //     activeCycleId: null,
+    //  }, (initialState) => {
+    //     const storedStateAsJSON = localStorage.getItem('@ignite-timer:cycles-state-1.0.0');
+
+    //     if (storedStateAsJSON) {
+    //         return JSON.parse(storedStateAsJSON)
+    //     }
+
+    //     return initialState
+    // })
+
+
+
+    // const {cycles, activeCycleId} = cycleState;
+    // const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId); 
+
+    // useEffect(() => {
+    //     const stateJSON = JSON.stringify(cycleState)
+
+    //     localStorage.setItem('@ignite-timer:cycles-state-1.0.0',stateJSON)
+    // },[cycleState])
+
+    // function createNewCycle(data: CreateProductData) {
+    //     const id = String(new Date().getTime());
+
+    //     const newCycle: Cycle = {
+    //         id,
+    //         image: data.image,
+    //         name: data.name,
+    //         description: data.description,
+    //         price: data.price,
+    //     }
+
+        
+    //     dispatch(AddNewCycleAction(newCycle))
+    //     setCycles((state) => [...state, newCycle]);
+    // }
+
+
+        // <ProductContext.Provider value={{
+        // // activeCycle, 
+        // // activeCycleId, 
+
+        // // cycles
+        // }}>
+        
+        // {children}
+        // </ProductContext.Provider>
+
+
+    // function markCurrentCycleAsFinished() {
+    //     dispatch(MarkCurrentCycleAsFinishedAction())
 
         // setCycles((state) => 
         //     state.map((cycle) => {
@@ -60,41 +145,26 @@ export function CyclesContextProvider({children}: CycleContextProviderProps){
         //             return cycle
         //         }
         //     }),
-        // )
-    }
 
-    function createNewCycle(data: CreateCycleData) {
-        const id = String(new Date().getTime());
 
-        const newCycle: Cycle = {
-            id,
-            image: data.image,
-            name: data.name,
-            description: data.description,
-            price: data.price,
-        }
+    // function createNewCycle(data: CreateProductData) {
+        // const id = String(new Date().getTime());
+
+        // const newCycle: Cycle = {
+        //     id,
+        //     image: data.image,
+        //     name: data.name,
+        //     description: data.description,
+        //     price: data.price,
+        // }
         
-        dispatch(AddNewCycleAction(newCycle))
+        // dispatch(AddNewCycleAction(newCycle))
         // setCycles((state) => [...state, newCycle]);
 
-    }
-
-    function interruptCurrentCycle() {
-        dispatch(interruptCurrentCycleAction())
-    }
 
 
-    return (
-        <CyclesContext.Provider value={{
-            activeCycle, 
-            activeCycleId, 
-            markCurrentCycleAsFinished, 
-            createNewCycle,
-            interruptCurrentCycle,
-            cycles
-        }}>
-        
-        {children}
-        </CyclesContext.Provider>
-    )
-}
+    // function interruptCurrentCycle() {
+    //     dispatch(interruptCurrentCycleAction())
+    // }
+
+

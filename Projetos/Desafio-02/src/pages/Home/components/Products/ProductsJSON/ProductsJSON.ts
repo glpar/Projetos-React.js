@@ -1,23 +1,25 @@
 import { ProductImages } from "./ProductImage";
-import { Cycle } from "../../../../../reducers/cycles/reducer";
+import { Product } from "../../../../../reducers/cycles/reducer";
 
 
-export const products: Cycle[] = [
+export const products: Product[] = [
     {
         id: "01",
         name: "Expresso Tradicional",
         description: "O tradicional café feito com água quente e grãos moídos",
-        price: 9.90,
+        price: 10,
         image: ProductImages.ExpressoTradicional,
         tags: ["Tradicional"],
+        quantity: 0,
     },
     {
         id: "02",
         name: "Expresso Americano",
         description: "Expresso diluído, menos intenso que o tradicional",
-        price: 9.90,
+        price: 5,
         image: ProductImages.ExpressoAmericano,
         tags: ["Tradicional"],
+        quantity: 0,
     },
     {
         id: "03",
@@ -26,6 +28,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.ExpressoCremoso,
         tags: ["Tradicional"],
+        quantity: 0,
     },
     {
         id: "04",
@@ -34,6 +37,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.ExpressoGelado,
         tags: ["Tradicional", "Gelado"],
+        quantity: 0,
     },
     {
         id: "05",
@@ -42,6 +46,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.CafeComLeite,
         tags: ["Tradicional", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "06",
@@ -50,6 +55,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Latte,
         tags: ["Tradicional", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "07",
@@ -58,6 +64,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Capuccino,
         tags: ["Tradicional", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "08",
@@ -66,6 +73,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Macchiato,
         tags: ["Tradicional", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "09",
@@ -74,6 +82,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Mocaccino,
         tags: ["Tradicional", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "10",
@@ -82,6 +91,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.ChocolateQuente,
         tags: ["Especial", "Com Leite"],
+        quantity: 0,
     },
     {
         id: "11",
@@ -90,6 +100,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Cubano,
         tags: ["Especial", "Alcoólico", "Gelado"],
+        quantity: 0,
     },
     {
         id: "12",
@@ -98,6 +109,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Havaiano,
         tags: ["Especial"],
+        quantity: 0,
     },
     {
         id: "13",
@@ -106,6 +118,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Arabe,
         tags: ["Especial"],
+        quantity: 0,
     },
     {
         id: "14",
@@ -114,6 +127,7 @@ export const products: Cycle[] = [
         price: 9.90,
         image: ProductImages.Irlandes,
         tags: ["Especial", "Alcoólico"],
+        quantity: 0,
     }
     
 ]

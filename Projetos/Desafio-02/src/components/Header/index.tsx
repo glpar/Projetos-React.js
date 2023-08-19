@@ -3,11 +3,21 @@ import { MapPin, ShoppingCart} from "phosphor-react";
 
 import logo from "../../assets/logo-ignite.svg";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { ProductsContext, useProductsContext } from "../../contexts/CyclesContext";
 
 export function Header(){
+    const {productsCart} = useProductsContext()
+
+    const quantity = productsCart.reduce((count, current) => {
+        return count + current.quantity;
+    }, 0)
+
     return (
         <HeaderContainer>
-            <img src={logo} alt="" />
+            <NavLink className="logo" to="/" title="Checkout">
+                <img src={logo} alt="" />
+            </NavLink>
             <nav>
 
                 <button className="localization">
@@ -18,6 +28,8 @@ export function Header(){
                 </NavLink> */}
                 <NavLink to="checkout" title="Checkout">
                     <ShoppingCart className="shopIcon" size={24}  weight="fill" />
+                    <div className="totalCounter">{quantity}</div>
+                    
                     {/* color="#DBAC2C" */}
                 </NavLink>
             </nav>

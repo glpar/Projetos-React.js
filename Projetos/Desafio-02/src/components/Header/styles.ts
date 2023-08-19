@@ -13,6 +13,17 @@ export const HeaderContainer = styled.header`
         gap: 0.5rem;
     }
 
+    .logo {
+        background-color: transparent;
+        &:hover {
+            background-color: transparent;
+            border-color: transparent;
+        }
+        &:focus {
+            box-shadow: 0 0 0 2px transparent
+        }
+    }
+
     .localization {
         display: flex;
         align-items: center;
@@ -40,7 +51,7 @@ export const HeaderContainer = styled.header`
         align-items: center;
 
         background-color: ${(props) => props.theme["yellow-100"]};
-        color: ${(props) => props.theme["red-500"]};
+        color: transparent;
 
         border-radius: 8px;
         border-top: 3px solid transparent;
@@ -52,13 +63,36 @@ export const HeaderContainer = styled.header`
             .shopIcon{
                 color: ${(props) => props.theme["white"]};
             }
+            .totalCounter{
+                background-color: ${(props) => props.theme["yellow-100"]};
+                color: ${(props) => props.theme["yellow-500"]};
+            }
         }
 
         &.active {
-            color: ${(props) => props.theme["green-500"]};
+            color: transparent
         }
     }
     .shopIcon{
         color: ${(props) => props.theme["yellow-300"]};
+    }
+
+    .totalCounter{
+        display: flex;
+        width: 20px;
+        height: 20px;
+        /* margin: 1rem; */
+        border-radius:50%;
+        background-color: ${(props) => props.theme["yellow-500"]};
+        align-items: center;
+        justify-content: center;
+        font-size: 60%;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+        top: 28px;
+        right: 62px;
+        margin-bottom: auto;
+        position: absolute;
     }
 `;

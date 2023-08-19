@@ -1,28 +1,28 @@
-import { Cycle } from "./reducer"
+import { Product } from "./reducer"
 
 export enum ActionTypes {
-    Add_New_Cycle='Add_New_Cycle',
-    Interrupt_Current_Cycle = 'Interrupt_Current_Cycle',
-    Mark_Current_Cycle_As_Finished='Mark_Current_Cycle_As_Finished'
+    Add_New_Product='Add_New_Product',
+    Interrupt_Current_Product = 'Interrupt_Current_Product',
+    Mark_Current_Product_As_Finished='Mark_Current_Cycle_As_Product'
 }
 
-export function AddNewCycleAction(newCycle: Cycle) {
+export function AddNewCycleAction(newProduct: Product) {
     return {
-        type: ActionTypes.Add_New_Cycle,
+        type: ActionTypes.Add_New_Product,
             payload: {
-                newCycle,
+                newProduct,
             }
     }
 }
 
 export function MarkCurrentCycleAsFinishedAction() {
     return {
-        type: ActionTypes.Mark_Current_Cycle_As_Finished,
+        type: ActionTypes.Mark_Current_Product_As_Finished,
     }
 }
 
 export function interruptCurrentCycleAction() {
     return{
-        type: ActionTypes.Interrupt_Current_Cycle,
+        type: ActionTypes.Interrupt_Current_Product,
     }
 }

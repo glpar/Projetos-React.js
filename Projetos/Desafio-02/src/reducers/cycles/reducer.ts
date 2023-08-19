@@ -1,87 +1,87 @@
 import  { produce } from 'immer'
 import { ActionTypes } from "./actions";
 
-export interface Cycle {
+export interface Product {
     id: string;
     name: string;
     image: string;
     description: string;
     price: number;
     tags: string[];
+    quantity: number;
 }
 
-interface CycleState{
-    cycles:Cycle[]
-    activeCycleId: string | null
+interface ProductState{
+    products:Product[]
+    activeProductId: string | null
 
 }
 
-export function cycleReducer(state: CycleState, action: any) {
-
-    switch (action.type) {
-        case ActionTypes.Add_New_Cycle:
-            return produce(state, draft => {
-                draft.cycles.push(action.payload.newCycle)
-                draft.activeCycleId = action.payload.newCycle.id
-            })
-            // return {
-            //     ...state,
-            //     cycles:[...state.cycles, action.payload.newCycle],
-            //     activeCycleId: action.payload.newCycle.id,
-            //}
-        case ActionTypes.Interrupt_Current_Cycle: {
-            const currentCycleIndex = state.cycles.findIndex(cycle => {
-                return cycle.id === state.activeCycleId
-            })
-
-            if (currentCycleIndex < 0) {
-                return state
+export function productReducer(state: ProductState, action: any) {
+        switch (action.type) {
+            case ActionTypes.Add_New_Product:
+                return produce(state, draft => {
+                    draft.products.push(action.payload.newCycle)
+                    draft.activeProductId = action.payload.newCycle.id
+                })
+                // return {
+                //     ...state,
+                //     cycles:[...state.cycles, action.payload.newCycle],
+                //     activeCycleId: action.payload.newCycle.id,
+                //}
+            case ActionTypes.Interrupt_Current_Product: {
+                const currentCycleIndex = state.products.findIndex(cycle => {
+                    return cycle.id === state.activeProductId
+                })
+    
+                if (currentCycleIndex < 0) {
+                    return state
+                }
+    
+                return produce(state, (draft) => {
+                    draft.activeProductId = null
+                })
+                // return {
+                //     ...state,
+                //     cycles: state.cycles.map((cycle) => {
+                //         if(cycle.id === state.activeCycleId) {
+                //              return {...cycle, interruptedDate: new Date(),}
+                //         }
+                //         else{
+                //              return cycle
+                //         }
+                //     }),
+                //     activeCycleId:null
+                // }
             }
-
-            return produce(state, (draft) => {
-                draft.activeCycleId = null
-            })
-            // return {
-            //     ...state,
-            //     cycles: state.cycles.map((cycle) => {
-            //         if(cycle.id === state.activeCycleId) {
-            //              return {...cycle, interruptedDate: new Date(),}
-            //         }
-            //         else{
-            //              return cycle
-            //         }
-            //     }),
-            //     activeCycleId:null
-            // }
-        }
-        case ActionTypes.Mark_Current_Cycle_As_Finished:{
-            const currentCycleIndex = state.cycles.findIndex(cycle => {
-                return cycle.id === state.activeCycleId
-            })
-
-            if (currentCycleIndex < 0) {
-                return state
+            case ActionTypes.Mark_Current_Product_As_Finished:{
+                const currentProductIndex = state.products.findIndex(product => {
+                    return product.id === state.activeProductId
+                })
+    
+                if (currentProductIndex < 0) {
+                    return state
+                }
+    
+                return produce(state, (draft) => {
+                    draft.activeProductId = null
+                })
             }
-
-            return produce(state, (draft) => {
-                draft.activeCycleId = null
-            })
+                // return {
+                //     ...state,
+                //     cycles: state.cycles.map((cycle) => {
+                //         if(cycle.id === state.activeCycleId) {
+                //             return {
+                //                 ...cycle, finishedDate: new Date(),
+                //             }
+                //         }
+                //             else{
+                //                 return cycle
+                //             }
+                // }),
+                //     activeCycleId:null
+                // }
+            default:         
+                return state;
         }
-            // return {
-            //     ...state,
-            //     cycles: state.cycles.map((cycle) => {
-            //         if(cycle.id === state.activeCycleId) {
-            //             return {
-            //                 ...cycle, finishedDate: new Date(),
-            //             }
-            //         }
-            //             else{
-            //                 return cycle
-            //             }
-            // }),
-            //     activeCycleId:null
-            // }
-        default:         
-            return state;
-    }
 }

@@ -1,10 +1,9 @@
-// import { useContext } from "react";
-// import {formatDistanceToNow} from 'date-fns'
 import { Bank, CreditCard, CurrencyDollar, Money } from "phosphor-react";
 import { FormContainer, CoffeeSelectionContainer, TitleContainer, PaymentButtons,
     // HistoryList, 
     // Status 
 } from "./styles";
+import { useProductsContext } from "../../../../contexts/CyclesContext";
 // import { CyclesContext } from "../../contexts/CyclesContext";
 // import { ptBR } from "date-fns/locale";
 
@@ -12,10 +11,17 @@ export function CoffeeSelection(){
     // const {cycles} =useContext(CyclesContext)
     // const {activeCycle} = useContext(CyclesContext)
     // const {register} = useFormContext()
+    const {productsCart} = useProductsContext()
 
+    const quantity = productsCart.reduce((count, current) => {
+        return count + current.quantity;
+    }, 0)
+
+    const totalPrice = productsCart.reduce((count, current) => {
+        return count + current.quantity * current.price;
+    }, 0);
     return (
         <CoffeeSelectionContainer>
-            <h1>Cafés selecionados</h1>
             <FormContainer >
                 <TitleContainer>
                     <div className="titleAndSubtitleContainer">
@@ -23,25 +29,22 @@ export function CoffeeSelection(){
                             <CurrencyDollar className="CurrencyDollar"size={22} />
                             <strong> Pagamento</strong>
                         </div>
-                        <div className="subtitleText"> O pagamento é feito na entrega . Escolha a forma que deseja pagar:</div>
+                        <div className="subtitleText"> Items no Carrinho: {quantity}</div>
+                        <div className="subtitleText"> Custo Total: {totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                        <div className="subtitleText" >{productsCart.map((product) => (
+                            <div key={product.id}>
+                                {/* Aqui você pode renderizar as propriedades do produto */}
+                                <img src={product.image} />
+                                <p>{product.name}</p>
+                                <p>{product.description}</p>
+                                <p>{product.quantity}</p>
+                                <p>{product.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
+                                {/* ... outras propriedades */}
+                            </div>
+                        ))}
+                        </div>
                     </div>
                 </TitleContainer>
-                <PaymentButtons>
-                    <button className="payButton">
-                        <CreditCard className= "payIcon" size={15}/>
-                        CARTÃO DE CRÉDITO
-                    </button>
-
-                    <button className="payButton">
-                        <Bank className= "payIcon" size={15}/>
-                        CARTÃO DE DÉBITO
-                    </button>
-
-                    <button className="payButton">
-                        <Money className= "payIcon" size={15}/>
-                        DINHEIRO
-                    </button>
-                </PaymentButtons>
             </FormContainer>
         </CoffeeSelectionContainer>
 
