@@ -1,5 +1,5 @@
-import { Bank, CreditCard, CurrencyDollar, Money } from "phosphor-react";
-import { FormContainer, CoffeeSelectionContainer, TitleContainer, PaymentButtons,
+import { Bank, CreditCard, CurrencyDollar, Minus, Money, Plus, Trash } from "phosphor-react";
+import { FormContainer, CoffeeSelectionContainer, TitleContainer, PaymentButtons, CoffeesContainer, QuantityContainer, CoffeeNameAndQuantityContainer, ButtonsContainer,
     // HistoryList, 
     // Status 
 } from "./styles";
@@ -11,7 +11,7 @@ export function CoffeeSelection(){
     // const {cycles} =useContext(CyclesContext)
     // const {activeCycle} = useContext(CyclesContext)
     // const {register} = useFormContext()
-    const {productsCart} = useProductsContext()
+    const {productsCart, removeToCart,addToCart, getQuantityByid} = useProductsContext()
 
     const quantity = productsCart.reduce((count, current) => {
         return count + current.quantity;
@@ -22,29 +22,56 @@ export function CoffeeSelection(){
     }, 0);
     return (
         <CoffeeSelectionContainer>
+            <h1>Complete seu pedido</h1>
             <FormContainer >
-                <TitleContainer>
-                    <div className="titleAndSubtitleContainer">
-                        <div className="alignTitle">
-                            <CurrencyDollar className="CurrencyDollar"size={22} />
-                            <strong> Pagamento</strong>
-                        </div>
-                        <div className="subtitleText"> Items no Carrinho: {quantity}</div>
-                        <div className="subtitleText"> Custo Total: {totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
-                        <div className="subtitleText" >{productsCart.map((product) => (
-                            <div key={product.id}>
-                                {/* Aqui você pode renderizar as propriedades do produto */}
-                                <img src={product.image} />
-                                <p>{product.name}</p>
-                                <p>{product.description}</p>
-                                <p>{product.quantity}</p>
-                                <p>{product.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
-                                {/* ... outras propriedades */}
+                <CoffeesContainer >
+                    {productsCart.map((product) => (
+                        <div className="List" key={product.id}>
+                            {/* Renderizar as propriedades do produto */}
+                            {/* ... */}
+
+                            <div className="imageContainer">
+                                <img src={product.image} alt={`Imagem de ${product.productName}`} />
                             </div>
-                        ))}
+                            <CoffeeNameAndQuantityContainer>
+                                <div className="subtitleTextCoffee">
+                                    <div className="coffeeTitle">{product.productName}</div>
+                                    <div className="price">
+                                        {product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                                    </div>
+                                </div>
+                                <ButtonsContainer>
+                                    <div className="coffee">
+                                        <button onClick={() => removeToCart(product.id)}>
+                                            <Minus />
+                                        </button>
+                                        <div className="quantity">{getQuantityByid(product.id)}</div>
+                                        <button onClick={() => addToCart(product.id, product.price, product.image, product.productName)}>
+                                            <Plus />
+                                        </button>
+                                    </div>
+                                    <button className="removeButton" onClick={() => removeToCart(product.id)}>
+                                        <Trash className="trashIcon" />
+                                        Remover
+                                    </button>
+                                </ButtonsContainer>
+                            </CoffeeNameAndQuantityContainer>
+                            {/* ... outras propriedades */}
                         </div>
-                    </div>
-                </TitleContainer>
+                    ))}
+                </CoffeesContainer>
+                <div className="totalPrice">
+                    <div className="subtitleText">Total de ofertas</div>
+                    <div className="subtitlePrice">{totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                </div>
+                <div className="totalFrete">
+                    <div className="subtitleText">Entrega</div>
+                    <div className="subtitlePrice">{totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                </div>
+                <div className="totalFullPrice">
+                    <div className="subtitleText">Total</div>
+                    <div className="subtitlePrice">{totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                </div>
             </FormContainer>
         </CoffeeSelectionContainer>
 

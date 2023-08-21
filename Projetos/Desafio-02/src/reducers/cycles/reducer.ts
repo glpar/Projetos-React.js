@@ -3,7 +3,7 @@ import { ActionTypes } from "./actions";
 
 export interface Product {
     id: string;
-    name: string;
+    productName: string;
     image: string;
     description: string;
     price: number;

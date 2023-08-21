@@ -5,9 +5,10 @@ import { AddNewCycleAction, MarkCurrentCycleAsFinishedAction, interruptCurrentCy
 export interface CreateProductData {
     id: string;
     image: string;
-    name: string;
+    productName: string;
     description: string;
     price: number;
+
 }
 
 export interface ProductContextType {
@@ -16,6 +17,9 @@ export interface ProductContextType {
     activeProductId: string | null;
     productsCart: Product[];
     setProductsCart: React.Dispatch<React.SetStateAction<Product[]>>;
+    addToCart: (id: string, price: number, image: string, productName: string ) => void
+    removeToCart: (id: string ) => void
+    getQuantityByid: (id:string) => void
 
     // addProductsCart:(id: string) =>void;
     // const setProductsCart: (value: React.SetStateAction<never[]>) => void
@@ -61,9 +65,47 @@ export function ProductsContextProvider({children}: ProductContextProviderProps)
     const {products, activeProductId} = cycleState;
     // const activeProduct = products.find((product) => product.id === activeProductId); 
 
+const addToCart = (id:string, price: number, image: string, productName: string ) => {
+        setProductsCart((currentProducts) => {
+            const isProductFound = currentProducts.find((product) => product.id === id)
+            if(isProductFound){
+                return currentProducts.map((product) => {
+                    if(product.id === id){
+                        return {...product, quantity: product.quantity + 1}
+                    }
+                    else {
+                        return product
+                    }
+                })
+            }
+            else {
+                return [...currentProducts, {id, quantity: 1, price, image, productName} as Product]
+            }
+        })
+    }
 
+    const removeToCart = (id: string) => {
+        setProductsCart((currentProducts) => {
+            if (currentProducts.find((product) => product.id === id)?.quantity === 1){
+                return currentProducts.filter((product) => product.id !== id)
+            }
 
+            else {
+                return currentProducts.map((product) => {
+                    if(product.id === id){
+                        return {...product, quantity: product.quantity - 1}
+                    }
+                    else {
+                        return product
+                    }
+                })
+            }
+        })
+    }
 
+    const getQuantityByid = (id:string) => {
+        return productsCart.find((product) => product.id === id)?.quantity || 0;
+    }
 
     return (
         <ProductsContext.Provider value={{
@@ -72,6 +114,9 @@ export function ProductsContextProvider({children}: ProductContextProviderProps)
             products,
             productsCart,
             setProductsCart,
+            addToCart,
+            removeToCart,
+            getQuantityByid
         }}>
         
             {children}

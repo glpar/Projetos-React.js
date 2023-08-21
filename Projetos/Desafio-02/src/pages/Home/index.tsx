@@ -28,7 +28,7 @@ export function Home(){
                 {products.map((product) => <Products 
                     image={product.image} 
                     id={product.id} 
-                    name ={product.name} 
+                    productName ={product.productName} 
                     description={product.description}
                     key ={product.id}
                     tags={product.tags}

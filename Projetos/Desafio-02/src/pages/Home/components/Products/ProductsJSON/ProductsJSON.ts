@@ -5,7 +5,7 @@ import { Product } from "../../../../../reducers/cycles/reducer";
 export const products: Product[] = [
     {
         id: "01",
-        name: "Expresso Tradicional",
+        productName: "Expresso Tradicional",
         description: "O tradicional café feito com água quente e grãos moídos",
         price: 10,
         image: ProductImages.ExpressoTradicional,
@@ -14,7 +14,7 @@ export const products: Product[] = [
     },
     {
         id: "02",
-        name: "Expresso Americano",
+        productName: "Expresso Americano",
         description: "Expresso diluído, menos intenso que o tradicional",
         price: 5,
         image: ProductImages.ExpressoAmericano,
@@ -23,7 +23,7 @@ export const products: Product[] = [
     },
     {
         id: "03",
-        name: "Expresso Cremoso",
+        productName: "Expresso Cremoso",
         description: "Café expresso tradicional com espuma cremosa",
         price: 9.90,
         image: ProductImages.ExpressoCremoso,
@@ -32,7 +32,7 @@ export const products: Product[] = [
     },
     {
         id: "04",
-        name: "Expresso Gelado",
+        productName: "Expresso Gelado",
         description: "Bebida preparada com café expresso e cubos de gelo",
         price: 9.90,
         image: ProductImages.ExpressoGelado,
@@ -41,7 +41,7 @@ export const products: Product[] = [
     },
     {
         id: "05",
-        name: "Café com Leite",
+        productName: "Café com Leite",
         description: "Meio a meio de expresso tradicional com leite vaporizado",
         price: 9.90,
         image: ProductImages.CafeComLeite,
@@ -50,7 +50,7 @@ export const products: Product[] = [
     },
     {
         id: "06",
-        name: "Latte",
+        productName: "Latte",
         description: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
         price: 9.90,
         image: ProductImages.Latte,
@@ -59,7 +59,7 @@ export const products: Product[] = [
     },
     {
         id: "07",
-        name: "Capuccino",
+        productName: "Capuccino",
         description: "Bebida com canela feita de doses iguais de café, leite e espuma",
         price: 9.90,
         image: ProductImages.Capuccino,
@@ -68,7 +68,7 @@ export const products: Product[] = [
     },
     {
         id: "08",
-        name: "Macchiato",
+        productName: "Macchiato",
         description: "Café expresso misturado com um pouco de leite quente e espuma",
         price: 9.90,
         image: ProductImages.Macchiato,
@@ -77,7 +77,7 @@ export const products: Product[] = [
     },
     {
         id: "09",
-        name: "Mocaccino",
+        productName: "Mocaccino",
         description: "Café expresso com calda de chocolate, pouco leite e espuma",
         price: 9.90,
         image: ProductImages.Mocaccino,
@@ -86,7 +86,7 @@ export const products: Product[] = [
     },
     {
         id: "10",
-        name: "Chocolate Quente",
+        productName: "Chocolate Quente",
         description: "Bebida feita com chocolate dissolvido no leite quente e café",
         price: 9.90,
         image: ProductImages.ChocolateQuente,
@@ -95,7 +95,7 @@ export const products: Product[] = [
     },
     {
         id: "11",
-        name: "Cubano",
+        productName: "Cubano",
         description: "Drink gelado de café expresso com rum, creme de leite e hortelã",
         price: 9.90,
         image: ProductImages.Cubano,
@@ -104,7 +104,7 @@ export const products: Product[] = [
     },
     {
         id: "12",
-        name: "Havaiano",
+        productName: "Havaiano",
         description: "Bebida adocicada preparada com café e leite de coco",
         price: 9.90,
         image: ProductImages.Havaiano,
@@ -113,7 +113,7 @@ export const products: Product[] = [
     },
     {
         id: "13",
-        name: "Árabe",
+        productName: "Árabe",
         description: "Bebida preparada com grãos de café árabe e especiarias",
         price: 9.90,
         image: ProductImages.Arabe,
@@ -122,7 +122,7 @@ export const products: Product[] = [
     },
     {
         id: "14",
-        name: "Irlandês",
+        productName: "Irlandês",
         description: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
         price: 9.90,
         image: ProductImages.Irlandes,
