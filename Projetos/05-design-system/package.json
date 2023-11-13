@@ -1,0 +1,15 @@
+{
+  "name": "@ignite-ui/tokens",
+  "version": "1.0.0",
+  "description": "- [] Text\r - [] Heading\r - [] Box\r - [] Button\r - [] TextInput\r - [] TextArea\r - [] Checkbox\r - [] Avatar\r - [] MultiStep",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
