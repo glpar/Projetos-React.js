@@ -1,7 +1,7 @@
 {
-  "name": "@ignite-ui/tokens",
+  "name": "@ignite-ui/react",
   "version": "1.0.0",
-  "description": "- [] Text\r - [] Heading\r - [] Box\r - [] Button\r - [] TextInput\r - [] TextArea\r - [] Checkbox\r - [] Avatar\r - [] MultiStep",
+  "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ignite-ui/tokens": "*",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   }
