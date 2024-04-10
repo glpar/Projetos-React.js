@@ -22,5 +22,5 @@
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "extends": "@ignite-ui/ts-config/react.json"
+  "extends": "@glpar-ui/ts-config/react.json"
 }
