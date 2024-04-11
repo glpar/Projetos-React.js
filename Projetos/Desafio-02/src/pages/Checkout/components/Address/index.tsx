@@ -5,6 +5,8 @@ import { FormContainer, AddressContainer, TitleContainer, CEPInput, RuaInput, Nu
     // HistoryList, 
     // Status 
 } from "./styles";
+import { useState } from "react";
+import { useAddressContext } from "../../../../contexts/AddressContext";
 // import { CyclesContext } from "../../contexts/CyclesContext";
 // import { ptBR } from "date-fns/locale";
 
@@ -12,6 +14,9 @@ export function Address(){
     // const {cycles} =useContext(CyclesContext)
     // const {activeCycle} = useContext(CyclesContext)
     // const {register} = useFormContext()
+
+    const { cep, setCep, rua, setRua, numero, setNumero,complemento, setComplemento, bairro, setBairro,
+        cidade, setCidade,uf, setUf} = useAddressContext();
 
     return (
         <AddressContainer>
@@ -30,6 +35,8 @@ export function Address(){
                     id="cep" 
                     // list="task-suggestion" 
                     placeholder="CEP"
+                    value={cep}
+                    onChange={(event) => setCep(event.target.value)}
                     // disabled={!!activeCycle}
                     // {...register('task')}
                 />
@@ -44,6 +51,8 @@ export function Address(){
                 <RuaInput
                     id="rua"
                     placeholder="Rua"  
+                    value={rua}
+                    onChange={(event) => setRua(event.target.value)}
                     // type="number" 
                     // id="minutesAmount" 
                     // placeholder="00" 
@@ -59,10 +68,14 @@ export function Address(){
                         type="number"
                         id="numberAddress"
                         placeholder="Número" 
+                        value={numero}
+                        onChange={(event) => setNumero(event.target.value)}
                     />
                     <ComplementoInput
                         id="complemento"
                         placeholder="Complemento" 
+                        value={complemento}
+                        onChange={(event) => setComplemento(event.target.value)}
                     />
                 </NumeroComplementoAlign>
                 
@@ -70,14 +83,20 @@ export function Address(){
                     <BairroInput
                         id="bairro"
                         placeholder="Bairro"  
+                        value={bairro}
+                        onChange={(event) => setBairro(event.target.value)}
                     />
                     <CidadeInput
                         id="cidade"
                         placeholder="Cidade" 
+                        value={cidade}
+                        onChange={(event) => setCidade(event.target.value)}
                     />
                     <UFInput
                         id="uf"
                         placeholder="UF" 
+                        value={uf}
+                        onChange={(event) => setUf(event.target.value)}
                     />
                 </NumeroComplementoAlign>
             </FormContainer>

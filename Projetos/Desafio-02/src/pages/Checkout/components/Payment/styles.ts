@@ -127,6 +127,15 @@ export const PaymentButtons = styled.div`
         &:active {
             background-color: ${(props) => props.theme['purple-500']};
         }
+
+        &.selected {
+            background-color: ${(props) => props.theme["purple-300"]};
+            color: ${(props) => props.theme["white"]};
+
+            .payIcon {
+                color: ${(props) => props.theme["white"]};
+            }
+        }
     }
 `
 

@@ -4,6 +4,7 @@ import { FormContainer, CoffeeSelectionContainer, TitleContainer, PaymentButtons
     // Status 
 } from "./styles";
 import { useProductsContext } from "../../../../contexts/CyclesContext";
+import { NavLink } from "react-router-dom";
 // import { CyclesContext } from "../../contexts/CyclesContext";
 // import { ptBR } from "date-fns/locale";
 
@@ -11,14 +12,20 @@ export function CoffeeSelection(){
     // const {cycles} =useContext(CyclesContext)
     // const {activeCycle} = useContext(CyclesContext)
     // const {register} = useFormContext()
-    const {productsCart, removeToCart,addToCart, getQuantityByid} = useProductsContext()
+    const {productsCart, removeToCart,addToCart, getQuantityByid, removeAllToCart} = useProductsContext()
 
-    const quantity = productsCart.reduce((count, current) => {
-        return count + current.quantity;
-    }, 0)
+    // const quantity = productsCart.reduce((count, current) => {
+    //     return count + current.quantity;
+    // }, 0)
+
+    const frete = 3.50;
 
     const totalPrice = productsCart.reduce((count, current) => {
         return count + current.quantity * current.price;
+    }, 0);
+
+    const totalPriceWithFrete = productsCart.reduce((count, current) => {
+        return count + (current.quantity * current.price) + frete;
     }, 0);
     return (
         <CoffeeSelectionContainer>
@@ -66,12 +73,16 @@ export function CoffeeSelection(){
                 </div>
                 <div className="totalFrete">
                     <div className="subtitleText">Entrega</div>
-                    <div className="subtitlePrice">{totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                    <div className="subtitlePrice">{frete.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
                 </div>
                 <div className="totalFullPrice">
                     <div className="subtitleText">Total</div>
-                    <div className="subtitlePrice">{totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
+                    <div className="subtitlePrice">{totalPriceWithFrete.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</div>
                 </div>
+                
+                <NavLink  to="../finalized" title="Finalized">
+                        Confirmar Perdido
+                </NavLink>
             </FormContainer>
         </CoffeeSelectionContainer>
 

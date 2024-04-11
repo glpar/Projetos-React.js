@@ -19,7 +19,8 @@ export interface ProductContextType {
     setProductsCart: React.Dispatch<React.SetStateAction<Product[]>>;
     addToCart: (id: string, price: number, image: string, productName: string ) => void
     removeToCart: (id: string ) => void
-    getQuantityByid: (id:string) => void
+    removeAllToCart: (id: string ) => void
+    getQuantityByid: (id: string) => number | null;
 
     // addProductsCart:(id: string) =>void;
     // const setProductsCart: (value: React.SetStateAction<never[]>) => void
@@ -103,9 +104,29 @@ const addToCart = (id:string, price: number, image: string, productName: string 
         })
     }
 
-    const getQuantityByid = (id:string) => {
-        return productsCart.find((product) => product.id === id)?.quantity || 0;
+    const removeAllToCart = (id: string) => {
+        setProductsCart((currentProducts) => {
+            if (currentProducts.find((product) => product.id === id)?.quantity === 1){
+                return currentProducts.filter((product) => product.id !== id)
+            }
+
+            else {
+                return currentProducts.map((product) => {
+                    if(product.id === id){
+                        return {...product, quantity: product.quantity = 0}
+                    }
+                    else {
+                        return product
+                    }
+                })
+            }
+        })
     }
+
+    const getQuantityByid = (id: string) => {
+        const product = productsCart.find((product) => product.id === id);
+        return product && product.quantity >= 0 ? product.quantity : 0;
+    };
 
     return (
         <ProductsContext.Provider value={{
@@ -116,7 +137,8 @@ const addToCart = (id:string, price: number, image: string, productName: string 
             setProductsCart,
             addToCart,
             removeToCart,
-            getQuantityByid
+            getQuantityByid,
+            removeAllToCart
         }}>
         
             {children}
