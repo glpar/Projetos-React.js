@@ -1,0 +1,3 @@
+{
+    "extends": "@glpar-ui/eslint-config"
+}

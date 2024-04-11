@@ -1,0 +1,4 @@
+{  
+    "extends": "@glpar-ui/ts-config/react.json",
+    "include": ["src"]
+}
