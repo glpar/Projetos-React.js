@@ -56,7 +56,7 @@ export const FormContainer = styled.div`
 
     .totalFrete {
         display: flex;
-        gap: 72%;
+        gap: 68%;
         align-items: center;
 
         .subtitleText {
@@ -81,7 +81,8 @@ export const FormContainer = styled.div`
     .totalFullPrice {
         display: flex;
         align-items: center;
-        gap: 73%;
+        gap: 68%;
+        padding: 0.5rem;
 
         .subtitleText {
             display: flex;
@@ -102,6 +103,32 @@ export const FormContainer = styled.div`
             font-weight:bold;
             font-size: 1.3rem;
         }
+    }
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        padding: 0.5rem;
+
+        background-color: ${(props) => props.theme["yellow-300"]};
+        color: white;
+
+        border-radius: 8px;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        text-decoration: none;
+
+        &:hover {
+            background-color: ${(props) => props.theme["yellow-500"]};
+            color: white;
+        }
+
+
+        /* &.active {
+            color: red
+        } */
     }
 
 `
@@ -209,6 +236,7 @@ export const ButtonsContainer = styled.div`
     }
 
 `
+
 // export const HistoryList = styled.div`
 //     flex: 1;
 //     overflow: auto;

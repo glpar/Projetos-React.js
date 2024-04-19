@@ -5,6 +5,8 @@ import { FormContainer, PaymentContainer, TitleContainer, PaymentButtons,
     // HistoryList, 
     // Status 
 } from "./styles";
+import { useState } from "react";
+import { usePaymentContext } from "../../../../contexts/PaymentContext";
 // import { CyclesContext } from "../../contexts/CyclesContext";
 // import { ptBR } from "date-fns/locale";
 
@@ -12,6 +14,11 @@ export function Payment(){
     // const {cycles} =useContext(CyclesContext)
     // const {activeCycle} = useContext(CyclesContext)
     // const {register} = useFormContext()
+    const paymentContext = usePaymentContext();
+
+    const handlePaymentClick = (paymentType) => {
+        paymentContext.setSelectedPayment(paymentType);
+    };
 
     return (
         <PaymentContainer>
@@ -26,19 +33,25 @@ export function Payment(){
                     </div>
                 </TitleContainer>
                 <PaymentButtons>
-                    <button className="payButton">
-                        <CreditCard className= "payIcon" size={15}/>
+                    <button type="button" value="" className={`
+                        payButton ${paymentContext.selectedPayment === "Cartão de Crédito" ? "selected" : ""}`}
+                        onClick={() => handlePaymentClick("Cartão de Crédito")}>
+                            <CreditCard className= "payIcon" size={15}/>
                         CARTÃO DE CRÉDITO
                     </button>
 
-                    <button className="payButton">
-                        <Bank className= "payIcon" size={15}/>
-                        CARTÃO DE DÉBITO
+                    <button className={`
+                        payButton ${paymentContext.selectedPayment === "Cartão de Débito" ? "selected" : ""}`}
+                        onClick={() => handlePaymentClick("Cartão de Débito")}>
+                            <Bank className= "payIcon" size={15}/>
+                            CARTÃO DE DÉBITO
                     </button>
 
-                    <button className="payButton">
-                        <Money className= "payIcon" size={15}/>
-                        DINHEIRO
+                    <button className={`
+                        payButton ${paymentContext.selectedPayment === "Dinheiro" ? "selected" : ""}`}
+                        onClick={() => handlePaymentClick("Dinheiro")}>
+                            <Money className= "payIcon" size={15}/>
+                            DINHEIRO
                     </button>
                 </PaymentButtons>
             </FormContainer>
