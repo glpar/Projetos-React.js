@@ -73,12 +73,18 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
   })
 
   const calendarWeeks = useMemo(() => {
+    if (!blockedDates) {
+      return []
+    }
+
     const daysInMonthArray = Array.from({
       length: currentDate.daysInMonth(),
     }).map((_, i) => {
       return currentDate.set('date', i + 1)
     })
+
     const firstWeekDay = currentDate.get('day')
+
     const previousMonthFillArray = Array.from({
       length: firstWeekDay,
     })
